@@ -1,4 +1,4 @@
-package OnlineShop2;
+package main.java;
 
 // Родительский класс
 abstract class Product {
@@ -29,23 +29,6 @@ class Electronic extends Product {
     public void displayInfo() {
         System.out.println("Электроника: " + getName() +
                 " | Бренд: " + brand +
-                " | Цена: " + getPrice() + " руб.");
-    }
-}
-
-// Новый класс: Книга
-class Book extends Product {
-    private String author;
-
-    public Book(String name, double price, String author) {
-        super(name, price);
-        this.author = author;
-    }
-
-    @Override
-    public void displayInfo() {
-        System.out.println("Книга: " + getName() +
-                " | Автор: " + author +
                 " | Цена: " + getPrice() + " руб.");
     }
 }
@@ -97,43 +80,21 @@ class Order {
     }
 }
 
-// Новый класс: Покупатель
-class Customer {
-    private String fullName;
-    private String email;
-
-    public Customer(String fullName, String email) {
-        this.fullName = fullName;
-        this.email = email;
-    }
-
-    public void makeOrder(Order order) {
-        System.out.println("Покупатель " + fullName + " (" + email + ") сделал заказ:");
-        order.confirmOrder();
-    }
-}
-
 public class OnlineShop {
     public static void main(String[] args) {
         Product phone = new Electronic("Смартфон", 25000, "Samsung");
         Product laptop = new Electronic("Ноутбук", 55000, "Lenovo");
-        Product book = new Book("Программирование на Java", 1500, "Герберт Шилдт");
 
         Category electronics = new Category("Электроника");
         electronics.assignProduct(phone);
         electronics.assignProduct(laptop);
 
-        Category books = new Category("Книги");
-        books.assignProduct(book);
-
         Cart cart = new Cart();
         cart.addProduct(phone);
         cart.addProduct(laptop);
-        cart.addProduct(book);
 
         Order order = new Order(cart);
-
-        Customer customer = new Customer("Иван Петров", "ivan.petrov@example.com");
-        customer.makeOrder(order);
+        order.confirmOrder();
     }
 }
+
